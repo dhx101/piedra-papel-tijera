@@ -42,44 +42,43 @@ function playRound() {
     
     if (playerChoice == 0) {
         if (computerChoice == 0 ) {
-            let result = 'Draw rock rock' ;
-            return result;
+            console.log('Draw Rock draws with Rock');
          } else if (computerChoice == 1) {
-            let result = "You Lose! rock paper";
-            return result
+            console.log('You Lose! Rock Loses against Paper');
+
          } else if (computerChoice == 2) {
-            let result = 'You Won! rock sci';
-            return result;
+            console.log('You Won! Rock beats Scissors');
+;
          }
         } else if (playerChoice == 1) {
          if (computerChoice == 0 ) {
-            let result = 'You Won! paper rock';
-            return result;
+            console.log('You Won! Paper beast Rock');
          } else if (computerChoice == 1) {
-            let result = "Draw paper paper";
-            return result
+            console.log('Draw Paper draws with Paper');
          } else if (computerChoice == 2) {
-            let result = 'You Lose! paper sci';
-            return result;
+            console.log('You Lose! Paper Loses against Scissors');
          }
     } else if (playerChoice == 2) {
         if (computerChoice == 0 ) {
-            let result = 'You Lose! sci rock';
-            return result;
+            console.log('You Lose! Scissors Loses against Rock');
          } else if (computerChoice == 1) {
-            let result = 'You Win! sci paper';
-            return result
+            console.log('You Win! Scissors Beats Paper');
          } else if (computerChoice == 2) {
-            let result = 'Draw sci sci';
-            return result;
+            console.log('Draw Scissors Draws with Scissors');
          }
     } else {
-        let result = 'You didnt choose an avaliable choice'
-        return result
+        console.log('You didnt write an avaliable option');
     }
     
 }
 
+function game() {
+    playRound()
+    playRound()
+    playRound()
+    playRound()
+    playRound()
+}
 
-console.log(playRound())
+document.write(game())
 
