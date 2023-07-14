@@ -61,4 +61,3 @@ function playRound() {
 
 document.write(game())
 
-*/
