@@ -8,28 +8,14 @@ function getComputerChoice() {
     let numero = Math.floor(Math.random()*3)
     return numero;
 }
-/*Created a way to get user choice and made the trasnformation to a value from 0 to 2 */
 
-let writePlayerChoice = prompt('Choose Rock, Paper, Scissors')
+const botones = document.querySelectorAll('button');
 
+botones.forEach(boton => boton.addEventListener('click', function (e) {
+    let value = (this.value);
+    return value;
+}));
 
-function transformPlayerChoice(writePlayerChoice) {
-    let promtPlayerChoice = writePlayerChoice.toUpperCase()
-    if (promtPlayerChoice == 'ROCK') {
-        let numPlayerChoice = 0;
-        return numPlayerChoice;
-    } else if (promtPlayerChoice == 'PAPER') {
-        let numPlayerChoice = 1;
-        return numPlayerChoice;
-    } else if ( promtPlayerChoice == 'SCISSORS') {
-        let numPlayerChoice = 2;
-        return numPlayerChoice;
-    } else {
-        let numPlayerChoice = ('You didnt chose a avaliable choice')
-        return numPlayerChoice;
-    }
-    
-}
 
 
 /* Want to create a funtion that will see if you win, lose or draw depending of your choice*/
@@ -72,13 +58,7 @@ function playRound() {
     
 }
 
-function game() {
-    playRound()
-    playRound()
-    playRound()
-    playRound()
-    playRound()
-}
 
 document.write(game())
 
+*/
