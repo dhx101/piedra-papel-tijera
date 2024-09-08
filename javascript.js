@@ -1,84 +1,155 @@
 /*
-0 = Piedra
-1 = Papel
-2 = Tijera
+0 = Piedra (Rock)
+1 = Papel (Paper)
+2 = Tijera (Scissors)
 */
-/* Making a random number generator from 0 to 2 so the machine can chose a option*/
+
+// Random number generator for computer choice (0 to 2)
 function getComputerChoice() {
-    let numero = Math.floor(Math.random()*3)
-    return numero;
+    return Math.floor(Math.random() * 3);
 }
-/*Created a way to get user choice and made the trasnformation to a value from 0 to 2 */
 
-let writePlayerChoice = prompt('Choose Rock, Paper, Scissors')
-
-
-function transformPlayerChoice(writePlayerChoice) {
-    let promtPlayerChoice = writePlayerChoice.toUpperCase()
-    if (promtPlayerChoice == 'ROCK') {
-        let numPlayerChoice = 0;
-        return numPlayerChoice;
-    } else if (promtPlayerChoice == 'PAPER') {
-        let numPlayerChoice = 1;
-        return numPlayerChoice;
-    } else if ( promtPlayerChoice == 'SCISSORS') {
-        let numPlayerChoice = 2;
-        return numPlayerChoice;
+// Transform player's button selection into a number (0 = rock, 1 = paper, 2 = scissors)
+function transformPlayerChoice(choice) {
+    if (choice === 'rock') {
+        return 0;
+    } else if (choice === 'paper') {
+        return 1;
+    } else if (choice === 'scissors') {
+        return 2;
     } else {
-        let numPlayerChoice = ('You didnt chose a avaliable choice')
-        return numPlayerChoice;
+        return 'Invalid choice';
     }
-    
 }
 
+// Variable to store the player's choice
+let playerChoice = null;
 
-/* Want to create a funtion that will see if you win, lose or draw depending of your choice*/
+// Function to update the player's choice image
+function updatePlayerImage(choice) {
+    const imgElement = document.getElementById('playerChoice');
+    if (choice === 'rock') {
+        imgElement.src = 'rock.png';  // Image for Rock
+        imgElement.alt = 'Piedra';
+    } else if (choice === 'paper') {
+        imgElement.src = 'paper.png';  // Image for Paper
+        imgElement.alt = 'Papel';
+    } else if (choice === 'scissors') {
+        imgElement.src = 'scissors.png';  // Image for Scissors
+        imgElement.alt = 'Tijeras';
+    }
+}
 
+// Function to change the computer's choice image
+function updateComputerImage(computerChoice) {
+    const imgElement = document.getElementById('computerChoice');
+    if (computerChoice === 0) {
+        imgElement.src = 'rock.png';  // Image for Rock
+        imgElement.alt = 'Piedra';
+    } else if (computerChoice === 1) {
+        imgElement.src = 'paper.png';  // Image for Paper
+        imgElement.alt = 'Papel';
+    } else if (computerChoice === 2) {
+        imgElement.src = 'scissors.png';  // Image for Scissors
+        imgElement.alt = 'Tijeras';
+    }
+}
+
+// Function to update the images for win/lose/draw
+function updateResultImages(playerWins) {
+    const playerImgElement = document.getElementById('playerChoice');
+    const computerImgElement = document.getElementById('computerChoice');
+
+    if (playerWins === 'win') {
+        playerImgElement.src = 'win.png';     // Image when player wins
+        computerImgElement.src = 'lose.png';  // Image when computer loses
+    } else if (playerWins === 'lose') {
+        playerImgElement.src = 'lose.png';    // Image when player loses
+        computerImgElement.src = 'win.png';   // Image when computer wins
+    } else if (playerWins === 'draw') {
+        playerImgElement.src = 'draw.png';    // Image for a draw
+        computerImgElement.src = 'draw.png';  // Image for a draw
+    }
+}
+
+// Function to play the round
 function playRound() {
-    let playerChoice = transformPlayerChoice(writePlayerChoice)
-    let computerChoice = getComputerChoice()
-    console.log(computerChoice)
-    console.log(playerChoice)
-    
-    if (playerChoice == 0) {
-        if (computerChoice == 0 ) {
-            console.log('Draw Rock draws with Rock');
-         } else if (computerChoice == 1) {
-            console.log('You Lose! Rock Loses against Paper');
-
-         } else if (computerChoice == 2) {
-            console.log('You Won! Rock beats Scissors');
-;
-         }
-        } else if (playerChoice == 1) {
-         if (computerChoice == 0 ) {
-            console.log('You Won! Paper beast Rock');
-         } else if (computerChoice == 1) {
-            console.log('Draw Paper draws with Paper');
-         } else if (computerChoice == 2) {
-            console.log('You Lose! Paper Loses against Scissors');
-         }
-    } else if (playerChoice == 2) {
-        if (computerChoice == 0 ) {
-            console.log('You Lose! Scissors Loses against Rock');
-         } else if (computerChoice == 1) {
-            console.log('You Win! Scissors Beats Paper');
-         } else if (computerChoice == 2) {
-            console.log('Draw Scissors Draws with Scissors');
-         }
-    } else {
-        console.log('You didnt write an avaliable option');
+    if (playerChoice === null) {
+        alert('Please select an option before playing!');
+        return;
     }
-    
+
+    let computerChoice = getComputerChoice();
+    updateComputerImage(computerChoice); // Update the computer's image
+
+    let resultMessage = '';
+    let resultStatus = '';  // 'win', 'lose', or 'draw'
+
+    if (playerChoice == 0) { // Player chose Rock
+        if (computerChoice == 0) {
+            resultMessage = 'Empate! Piedra vs Piedra';
+            resultStatus = 'draw';
+        } else if (computerChoice == 1) {
+            resultMessage = '¡Perdiste! Piedra pierde contra Papel';
+            resultStatus = 'lose';
+        } else {
+            resultMessage = '¡Ganaste! Piedra gana contra Tijeras';
+            resultStatus = 'win';
+        }
+    } else if (playerChoice == 1) { // Player chose Paper
+        if (computerChoice == 0) {
+            resultMessage = '¡Ganaste! Papel gana contra Piedra';
+            resultStatus = 'win';
+        } else if (computerChoice == 1) {
+            resultMessage = 'Empate! Papel vs Papel';
+            resultStatus = 'draw';
+        } else {
+            resultMessage = '¡Perdiste! Papel pierde contra Tijeras';
+            resultStatus = 'lose';
+        }
+    } else if (playerChoice == 2) { // Player chose Scissors
+        if (computerChoice == 0) {
+            resultMessage = '¡Perdiste! Tijeras pierde contra Piedra';
+            resultStatus = 'lose';
+        } else if (computerChoice == 1) {
+            resultMessage = '¡Ganaste! Tijeras gana contra Papel';
+            resultStatus = 'win';
+        } else {
+            resultMessage = 'Empate! Tijeras vs Tijeras';
+            resultStatus = 'draw';
+        }
+    }
+
+    // Display the result in the HTML
+    document.getElementById('result').innerText = resultMessage;
+
+    // Update images for win/lose/draw result
+    if (resultStatus === 'win') {
+        updateResultImages('win');
+    } else if (resultStatus === 'lose') {
+        updateResultImages('lose');
+    } else if (resultStatus === 'draw') {
+        updateResultImages('draw');
+    }
 }
 
-function game() {
-    playRound()
-    playRound()
-    playRound()
-    playRound()
-    playRound()
-}
+// Event listeners for each button to set the player choice and update the player's image
+document.getElementById('rock').addEventListener('click', function() {
+    playerChoice = transformPlayerChoice('rock');
+    updatePlayerImage('rock');
+});
 
-document.write(game())
+document.getElementById('paper').addEventListener('click', function() {
+    playerChoice = transformPlayerChoice('paper');
+    updatePlayerImage('paper');
+});
 
+document.getElementById('scissors').addEventListener('click', function() {
+    playerChoice = transformPlayerChoice('scissors');
+    updatePlayerImage('scissors');
+});
+
+// Event listener for the "Seleccionar" button to start the game
+document.getElementById('play').addEventListener('click', function() {
+    playRound();
+});

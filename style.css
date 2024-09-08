@@ -1,0 +1,61 @@
+* {
+    font-family: 'Courier New', Courier, monospace;
+    box-sizing: content-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+}
+h1 {
+    text-align: center;
+}
+.images {
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    padding: 25px;
+}
+
+.images img {
+    height: 200px;
+}
+.versus {
+    font-size: 100px;
+}
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    align-self: center;
+}
+
+.buttons > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+button {
+    font-size: 30px;
+    padding: 15px 25px;
+    width: 200px;
+    height: 50px;
+}
+button img {
+    width: 50px;
+}
+#play {
+    align-self: center;
+}
+#result {
+    font-size: 50px;
+    text-align: center;
+}
