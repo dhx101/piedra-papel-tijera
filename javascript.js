@@ -4,13 +4,11 @@
 2 = Tijera (Scissors)
 */
 
-// Random number generator for computer choice (0 to 2)
-function getComputerChoice() {
+const getComputerChoice = () => {
 	return Math.floor(Math.random() * 3);
-}
+};
 
-// Transform player's button selection into a number (0 = rock, 1 = paper, 2 = scissors)
-function transformPlayerChoice(choice) {
+const transformPlayerChoice = (choice) => {
 	if (choice === "rock") {
 		return 0;
 	} else if (choice === "paper") {
@@ -20,60 +18,59 @@ function transformPlayerChoice(choice) {
 	} else {
 		return "Invalid choice";
 	}
-}
+};
 
-// Variable to store the player's choice
 let playerChoice = null;
 
-// Function to update the player's choice image
-function updatePlayerImage(choice) {
+const updatePlayerImage = (choice) => {
 	const imgElement = document.getElementById("playerChoice");
 	if (choice === "rock") {
-		imgElement.src = "rock.png"; // Image for Rock
+		imgElement.src = "rock.png";
 		imgElement.alt = "Piedra";
 	} else if (choice === "paper") {
-		imgElement.src = "paper.png"; // Image for Paper
+		imgElement.src = "paper.png";
 		imgElement.alt = "Papel";
 	} else if (choice === "scissors") {
-		imgElement.src = "scissors.png"; // Image for Scissors
+		imgElement.src = "scissors.png";
 		imgElement.alt = "Tijeras";
 	}
-}
+};
 
-// Function to change the computer's choice image
-function updateComputerImage(computerChoice) {
+const updateComputerImage = (computerChoice) => {
 	const imgElement = document.getElementById("computerChoice");
 	if (computerChoice === 0) {
-		imgElement.src = "rock.png"; // Image for Rock
+		imgElement.src = "rock.png";
 		imgElement.alt = "Piedra";
 	} else if (computerChoice === 1) {
-		imgElement.src = "paper.png"; // Image for Paper
+		imgElement.src = "paper.png";
 		imgElement.alt = "Papel";
 	} else if (computerChoice === 2) {
-		imgElement.src = "scissors.png"; // Image for Scissors
+		imgElement.src = "scissors.png";
 		imgElement.alt = "Tijeras";
 	}
-}
+};
 
-// Function to update the images for win/lose/draw
-function updateResultImages(playerWins) {
+const updateResultImages = (playerWins) => {
 	const playerImgElement = document.getElementById("playerChoice");
 	const computerImgElement = document.getElementById("computerChoice");
 
 	if (playerWins === "win") {
-		playerImgElement.src = "win.png"; // Image when player wins
-		computerImgElement.src = "lose.png"; // Image when computer loses
+		playerImgElement.src = "win.png";
+		computerImgElement.src = "lose.png";
 	} else if (playerWins === "lose") {
-		playerImgElement.src = "lose.png"; // Image when player loses
-		computerImgElement.src = "win.png"; // Image when computer wins
+		playerImgElement.src = "lose.png";
+		computerImgElement.src = "win.png";
 	} else if (playerWins === "draw") {
-		playerImgElement.src = "draw.png"; // Image for a draw
-		computerImgElement.src = "draw.png"; // Image for a draw
+		playerImgElement.src = "draw.png";
+		computerImgElement.src = "draw.png";
 	}
-}
+};
 
-// Function to play the round
-function playRound() {
+const updateScoreBoard = () => {
+	score.textContent = Number(score.textContent) + 1;
+};
+
+const playRound = () => {
 	if (playerChoice === null) {
 		alert("Please select an option before playing!");
 		return;
@@ -126,13 +123,14 @@ function playRound() {
 		// Update images for win/lose/draw result
 		if (resultStatus === "win") {
 			updateResultImages("win");
+			updateScoreBoard();
 		} else if (resultStatus === "lose") {
 			updateResultImages("lose");
 		} else if (resultStatus === "draw") {
 			updateResultImages("draw");
 		}
 	}, 1000);
-}
+};
 
 // Event listeners for each button to set the player choice and update the player's image
 document.getElementById("rock").addEventListener("click", function () {
@@ -154,3 +152,5 @@ document.getElementById("scissors").addEventListener("click", function () {
 document.getElementById("play").addEventListener("click", function () {
 	playRound();
 });
+
+const score = document.getElementById("score");
